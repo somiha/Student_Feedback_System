@@ -1,0 +1,41 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block body %}
+
+{% include 'navbar.html' %}
+
+<section id="hero_area">
+    <div class="inner_hero container">
+        <img src="{{ stuprofile.profile_pic.url }}" alt="" class="alignleft">
+        <h4>{{stuprofile.user.first_name}} {{stuprofile.user.last_name}}</h4>
+        <p>
+            {{stuprofile.year_semester}}<br>
+            Roll No: {{user.username}} <br>
+            Session: {{stuprofile.batch}}<br>
+            Email: {{user.email}}<br>
+            Contact No: {{stuprofile.contantnum}}<br>
+            <a href="{% url 'changepass' %}">Update password</a>
+            <br>
+            Course List: <br>
+        </p>
+        <table>
+            <tr>
+                <th>Course Id</th>
+                <th>Course Name</th>
+            </tr>
+            {% for i in subjects %}
+            <tr>
+                <td>{{i.subject.subcode}}</td>
+                <td>{{ i }}</td>
+                <td>{{ i.subject.}}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block body %}
+
+{% include 'navbar.html' %}
+
+<section id="hero_area">
+    <div class="inner_hero container">
+
+      <h4>Course Review List Avarage: </h4>
+        <table>
+            <tr>
+                <th>Course Name</th>
+                <th>Semester</th>
+                <th>Teacher</th>
+                <th>Rating</th>
+                <th>Not Given</th>
+            </tr>
+            {% for i,j in allrevs %}
+            <tr>
+                <td>{{i.subject}}</td>
+                <td>{{ i.semester }}</td>
+                <td>{{i.teacher}}</td>
+                <td>{{ j.avg}}</td>
+                <td><a href="{% url 'notgiven' pk=i.pk %}">view</a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</section>
+
+{% endblock %}
