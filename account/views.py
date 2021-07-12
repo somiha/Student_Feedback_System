@@ -244,23 +244,24 @@ def notgiven(request, pk):
     revset = get_object_or_404(ReviewSet, pk=pk)
     students = StudentProfile.objects.filter(dept=revset.dept)
     reviews = Review.objects.filter(reviewfor=revset)
-    given = []
+    given=[]
     for i in reviews:
-        if i.user is not given:
+        if i.user not in given:
             given.append(i.user)
-        notgivenstu = []
-        for i in students:
-            if i is not given:
+    notgivenstu = []
+    for i in students:
+        if i not in given:
+            if i.user not in given:
                 notgivenstu.append(i)
 
-            #print(revset)
-            #print(notgivenstu)
-            #print(given)
+            print(revset)
+            print(notgivenstu)
+            print(given)
 
-        context = {
-            'notgiven': notgivenstu
-         }
-        return render(request, 'back/notgiven.html', context)
+    context = {
+         'notgiven': notgivenstu
+    }
+    return render(request, 'back/notgiven.html', context)
 
 
 
