@@ -64,10 +64,10 @@ class Review(models.Model):
 
 class ReviewDetails(models.Model):
 
-    review = models.ForeignKey(ReviewSet, on_delete=models.CASCADE)
-    usergiven = models.IntegerField(default=0)
-    totalpoint = models.DecimalField(max_digits=20, decimal_places=4, default=0.0)
-    avg = models.DecimalField(max_digits=20, decimal_places=4, default=0.0)
+    review = models.ForeignKey(ReviewSet, on_delete=models.CASCADE, editable=False)
+    usergiven = models.IntegerField(default=0, editable=False)
+    totalpoint = models.DecimalField(max_digits=20, decimal_places=4, default=0.0, editable=False)
+    avg = models.DecimalField(max_digits=20, decimal_places=4, default=0.0, editable=False)
     
     def __str__(self):
         return str(self.review.name)

@@ -4,8 +4,14 @@ from .models import *
 from django.contrib.auth.models import User
 
 # Register your models here.
-admin.site.register(StudentProfile)
-admin.site.register(Teacher)
+class staff(admin.ModelAdmin):
+    readonly_fields = ('pass_updated',)
+class student(admin.ModelAdmin):
+    readonly_fields = ('pass_updated',)
+class teacher(admin.ModelAdmin):
+    readonly_fields = ('pass_updated',)
+admin.site.register(StudentProfile, student)
+admin.site.register(Teacher, teacher)
 
 
 class UserAdminConfig(UserAdmin):
@@ -35,7 +41,7 @@ class UserAdminConfig(UserAdmin):
          else:
              # modify these to suit the fields you want your
              # staff user to be able to edit
-             perm_fields = ('is_active', 'is_staff')
+             perm_fields = ('is_active', 'is_staff', 'groups')
 
          return [(None, {'fields': ('username', 'password')}),
                  (('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
@@ -47,4 +53,4 @@ admin.site.register(User, UserAdminConfig)
 admin.site.register(Dept)
 admin.site.register(Batch)
 admin.site.register(Semester)
-admin.site.register(Staff)
+admin.site.register(Staff,staff)
